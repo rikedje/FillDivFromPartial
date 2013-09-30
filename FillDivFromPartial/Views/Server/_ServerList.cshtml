@@ -1,0 +1,40 @@
+﻿@model IEnumerable<FillDivFromPartial.Models.Server>
+<html>
+    <body>
+
+@using(Html.BeginForm("ListPost", "Server")) {
+<table>
+    <tr>
+        <th>@DateTime.Now</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isOnline)
+        </th>
+    </tr>
+    
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                <input type="hidden" name="servers.Index" value="@item.Id" />
+                <input type="hidden" name="servers[@item.Id].Id" value="@item.Id" />
+            </td>
+            
+            <td>
+                <input type="text" name="servers[@item.Id].Name" value="@item.Name" />  
+            </td>
+            <td>
+                @Html.CheckBox("servers[" + item.Id + "].isOnline", item.isOnline)
+            </td>
+           
+        </tr>
+    }
+    </table>
+    <p>
+        <input id="btnSubmit" type="submit" value="Save" title="/server/listpost"/>
+    </p>
+}
+    </body>
+</html>

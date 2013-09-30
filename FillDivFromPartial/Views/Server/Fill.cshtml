@@ -1,0 +1,28 @@
+﻿@model IEnumerable<FillDivFromPartial.Models.Server>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<button id="btnClearDiv" onclick="clearDiv();">Clear div</button>
+<button id="btnFillDiv" onclick="fillDiv();">Fill div</button>
+
+<div id="fromPartial"></div>
+
+<script>
+
+    function clearDiv() {
+        console.log('cleared div');
+        $('#fromPartial').html('');
+    }
+
+    function fillDiv() {
+        $.get('/server/serverlist', function (data) {
+            $('#fromPartial').html(data);
+            console.log('filled div');
+        });
+    };
+
+</script>
